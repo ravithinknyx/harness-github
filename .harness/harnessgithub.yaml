@@ -46,7 +46,7 @@ pipeline:
                     image: plugins/github-actions
                     privileged: true
                     settings:
-                      uses: ravithinknyx/harness-github@main
+                      uses: rs2k/terraform:v1.0
                       with:
                         operation: sleep
                         command: "60"
