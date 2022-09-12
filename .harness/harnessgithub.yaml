@@ -53,6 +53,7 @@ pipeline:
                         exit-code: "1"
                         ignore-unfixed: "true"
                         vuln-type: os,library
-                        severity: CRITICAL,HIGH,LOW
+                        severity: HIGH,LOW
                       env:
                         CI: true
+                  failureStrategies: []
