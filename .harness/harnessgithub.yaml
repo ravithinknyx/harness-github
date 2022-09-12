@@ -38,16 +38,21 @@ pipeline:
                       - v1.0
                   failureStrategies: []
               - step:
+                  identifier: trivy
+                  name: Run Trivy vulnerability scanner
                   type: Plugin
-                  name: github-action
-                  identifier: githubaction
                   spec:
-                    connectorRef: ravidockergithub
+                    connectorRef: dockerhub
                     image: plugins/github-actions
                     privileged: true
                     settings:
-                      uses: rs2k/terraform@v1.0
+                      uses: aquasecurity/trivy-action@master
                       with:
-                        operation: sleep
-                        command: "60"
-                  description: Custom Action
+                        image-ref: drone/git
+                        format: table
+                        exit-code: "1"
+                        ignore-unfixed: "true"
+                        vuln-type: os,library
+                        severity: CRITICAL,HIGH,LOW
+                      env:
+                        CI: true
