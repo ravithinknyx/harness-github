@@ -1,0 +1,44 @@
+---
+
+name: Terraform Checkov Tflint GitHub Actions
+author: Ravi Singh
+description: Run tf commands
+
+inputs:
+  operation:
+    description: operation to execute
+    required: true
+  command:
+    description: command to execute
+    required: true
+  arguments:
+    description: arguments for command
+    required: false
+  working_directory:
+    description: working directory for command (defaults to root)
+    required: false
+  target:
+    description: file(s) or directory to target
+    required: false
+  output_file:
+    description: file to put output in
+    required: false
+
+outputs:
+  command:
+    description: interpolated command (incl. arguments) that will be executed
+
+runs:
+  using: 'docker'
+  image: rs2k/terraform:v1.0
+  args:
+    - ${{ inputs.operation }}
+    - ${{ inputs.command }}
+    - ${{ inputs.arguments }}
+    - ${{ inputs.target }}
+    - ${{ inputs.working_directory }}
+    - ${{ inputs.output_file }}
+ 
+branding:
+  color: green
+  icon: package
