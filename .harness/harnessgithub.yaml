@@ -47,6 +47,7 @@ pipeline:
                     privileged: true
                     settings:
                       uses: ravithinknyx/harness-github@main
-                      operation: sleep
-                      command: "60"
+                      with:
+                        operation: sleep
+                        command: "60"
                   description: Custom Action
