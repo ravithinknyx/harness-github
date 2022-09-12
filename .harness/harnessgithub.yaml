@@ -1,0 +1,39 @@
+pipeline:
+  name: harness-github
+  identifier: harnessgithub
+  projectIdentifier: Infra
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: trivy_docker_image
+        build: <+input>
+  stages:
+    - stage:
+        name: imagebuild
+        identifier: imagebuild
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          infrastructure:
+            type: KubernetesDirect
+            spec:
+              connectorRef: account.danfstatestcluster
+              namespace: harness-delegate-ng-statest
+              automountServiceAccountToken: true
+              nodeSelector: {}
+              os: Linux
+          execution:
+            steps:
+              - step:
+                  type: BuildAndPushDockerRegistry
+                  name: terraform
+                  identifier: terraform
+                  spec:
+                    connectorRef: ravidockergithub
+                    repo: rs2k/terraform
+                    tags:
+                      - v1.0
+                  failureStrategies: []
