@@ -37,3 +37,16 @@ pipeline:
                     tags:
                       - v1.0
                   failureStrategies: []
+              - step:
+                  type: Plugin
+                  name: github-action
+                  identifier: githubaction
+                  spec:
+                    connectorRef: ravidockergithub
+                    image: plugins/Github-Actions
+                    privileged: true
+                    settings:
+                      uses: ravithinknyx/harness-github@main
+                      operation: sleep
+                      command: "60"
+                  description: Custom Action
