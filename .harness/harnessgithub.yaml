@@ -42,7 +42,7 @@ pipeline:
                   name: Run Trivy vulnerability scanner
                   type: Plugin
                   spec:
-                    connectorRef: dockerhub
+                    connectorRef: ravidockergithub
                     image: plugins/github-actions
                     privileged: true
                     settings:
