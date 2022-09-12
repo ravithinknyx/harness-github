@@ -43,7 +43,7 @@ pipeline:
                   identifier: githubaction
                   spec:
                     connectorRef: ravidockergithub
-                    image: plugins/GitHub-actions
+                    image: plugins/github-actions
                     privileged: true
                     settings:
                       uses: ravithinknyx/harness-github@main
